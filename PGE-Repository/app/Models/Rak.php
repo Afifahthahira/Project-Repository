@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rak extends Model
 {
-    //
+    protected $table = 'raks';
+    protected $primaryKey = 'id_rak';
+    public $timestamps = false;
 }
