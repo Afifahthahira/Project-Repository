@@ -120,6 +120,11 @@
         @yield('content')
     </main>
 
+    {{-- Chatbot widget untuk user --}}
+    @if(!request()->routeIs('chatbot.index'))
+        @include('chatbot.widget', ['source' => 'user'])
+    @endif
+
     {{-- FOOTER --}}
     <footer class="bg-gray-100 border-t mt-20">
         <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
