@@ -139,6 +139,20 @@
                 </a>
             </li>
 
+            {{-- Chatbot Logs --}}
+            <li>
+                <a href="{{ route('admin.chat-history.index') }}"
+                    class="
+                    flex items-center gap-3 px-4 py-3 rounded-xl transition
+                    {{ request()->is('admin/chat-history*')
+                        ? 'bg-blue-900/80 text-white'
+                        : 'text-blue-900 hover:bg-blue-900/10 hover:text-blue-900' }}
+                ">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    Chatbot Logs
+                </a>
+            </li>
+
         </ul>
     </div>
 

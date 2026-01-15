@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\ChatbotController;
 
 // ============================================================
 // PUBLIC (bebas akses)
@@ -25,6 +26,10 @@ Route::get('/', function () {
 // Public search dokumen (tanpa login)
 Route::get('/search', [DokumenController::class, 'publicSearch'])->name('public.search');
 
+// Operasional Page
+Route::get('/operasional', function () {
+    return view('operasional.index');
+})->name('operasional');
 
 // ============================================================
 // AUTH (login, register, logout)
@@ -145,6 +150,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
         Route::get('activity-logs/export', [ActivityLogController::class, 'export'])->name('activity-logs.export');
         Route::get('notifications', [ActivityLogController::class, 'getNotifications'])->name('notifications');
+        Route::get('chat-history', [ChatbotController::class, 'history'])->name('chat-history.index');
     });
 });
 
@@ -156,6 +162,12 @@ Route::middleware(['auth.redirect'])->group(function () {
     Route::get('/user-dashboard', function () {
         return view('dashboard');
     })->name('user.dashboard');
+
+    // Chatbot (dapat diakses baik oleh user maupun admin selama sudah login)
+    Route::get('/chatbot', [ChatbotController::class, 'index'])
+        ->name('chatbot.index');
+    Route::post('/chatbot/send', [ChatbotController::class, 'send'])
+        ->name('chatbot.send');
 });
 
 
@@ -194,3 +206,4 @@ Route::middleware(['auth.redirect'])->group(function () {
 
 
 require __DIR__ . '/auth.php';
+

@@ -43,6 +43,8 @@
 
 {{-- Alpine.js for dropdowns --}}
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{{-- Chatbot widget untuk admin --}}
+@include('chatbot.widget', ['source' => 'admin'])
 
 {{-- Lucide Icons --}}
 <script src="/js/sidebar.js"></script>

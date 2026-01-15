@@ -40,6 +40,21 @@
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between min-h-[4rem]">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+
+            <a href="/" class="flex items-center space-x-2">
+                <img src="{{ asset('/images/LOGO-PGE.png') }}" class="h-6 mr-3 sm:h-9" alt="Pge Logo" />
+                <span class="font-semibold text-lg">PGE Repository</span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="hover:text-blue-700">Home</a>
+                <a href="/documents" class="hover:text-blue-700">Documents</a>
+                <a href="/news" class="hover:text-blue-700">News</a>
+                <a href="/operasional" class="hover:text-blue-700">Operasional</a>
+                <a href="/about" class="hover:text-blue-700">About Us</a>
+                <a href="/contact" class="hover:text-blue-700">Contact</a>
+            </div>
 
                 <a href="/" class="flex items-center space-x-2 flex-shrink-0">
                     <img src="{{ asset('/images/LOGO-PGE.png') }}" class="h-6 sm:h-8 lg:h-10 w-auto" alt="PGE Logo" />
@@ -111,6 +126,13 @@
                 <a href="/about" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-700 transition-colors rounded-lg font-medium">About Us</a>
                 <a href="/contact" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-700 transition-colors rounded-lg font-medium">Contact</a>
             </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <a href="/" class="block px-6 py-3 hover:bg-gray-100">Home</a>
+            <a href="/documents" class="block px-6 py-3 hover:bg-gray-100">Documents</a>
+            <a href="/news" class="block px-6 py-3 hover:bg-gray-100">News</a>
+            <a href="/operasional" class="block px-6 py-3 hover:bg-gray-100">Operasional</a>
+            <a href="/about" class="block px-6 py-3 hover:bg-gray-100">About Us</a>
+            <a href="/contact" class="block px-6 py-3 hover:bg-gray-100">Contact</a>
 
             @auth
                 <div class="border-t px-4 py-4">
@@ -148,6 +170,11 @@
 
         @yield('content')
     </main>
+
+    {{-- Chatbot widget untuk user --}}
+    @if(!request()->routeIs('chatbot.index'))
+        @include('chatbot.widget', ['source' => 'user'])
+    @endif
 
     {{-- FOOTER --}}
     <footer class="bg-gray-100 border-t mt-20">
@@ -224,6 +251,45 @@
                     </div>
                     
                 </div>
+        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">PGE Repository</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Sistem manajemen dokumen digital PT Pertamina Geothermal Energy
+                    untuk penyimpanan dan distribusi dokumen perusahaan.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li><a href="/" class="hover:text-blue-700">Home</a></li>
+                    <li><a href="/documents" class="hover:text-blue-700">Documents</a></li>
+                    <li><a href="/news" class="hover:text-blue-700">News</a></li>
+                    <li><a href="/operasional" class="hover:text-blue-700">Operasional</a></li>
+                    <li><a href="/about" class="hover:text-blue-700">About Us</a></li>
+                    <li><a href="/contact" class="hover:text-blue-700">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Resources</h3>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li><a href="#" class="hover:text-blue-700">Help Center</a></li>
+                    <li><a href="#" class="hover:text-blue-700">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-blue-700">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-blue-700">Support</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li>Gedung Pertamina, Jakarta</li>
+                    <li>Email: info@pge.id</li>
+                    <li>Phone: +62 123 456 789</li>
+                </ul>
             </div>
         </div>
     
