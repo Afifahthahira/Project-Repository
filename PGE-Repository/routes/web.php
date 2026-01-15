@@ -25,6 +25,10 @@ Route::get('/', function () {
 // Public search dokumen (tanpa login)
 Route::get('/search', [DokumenController::class, 'publicSearch'])->name('public.search');
 
+// Operasional Page
+Route::get('/operasional', function () {
+    return view('operasional.index');
+})->name('operasional');
 
 // ============================================================
 // AUTH (login, register, logout)

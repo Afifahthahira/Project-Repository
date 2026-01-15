@@ -38,6 +38,7 @@
                 <a href="/" class="hover:text-blue-700">Home</a>
                 <a href="/documents" class="hover:text-blue-700">Documents</a>
                 <a href="/news" class="hover:text-blue-700">News</a>
+                <a href="/operasional" class="hover:text-blue-700">Operasional</a>
                 <a href="/about" class="hover:text-blue-700">About Us</a>
                 <a href="/contact" class="hover:text-blue-700">Contact</a>
             </div>
@@ -84,6 +85,7 @@
             <a href="/" class="block px-6 py-3 hover:bg-gray-100">Home</a>
             <a href="/documents" class="block px-6 py-3 hover:bg-gray-100">Documents</a>
             <a href="/news" class="block px-6 py-3 hover:bg-gray-100">News</a>
+            <a href="/operasional" class="block px-6 py-3 hover:bg-gray-100">Operasional</a>
             <a href="/about" class="block px-6 py-3 hover:bg-gray-100">About Us</a>
             <a href="/contact" class="block px-6 py-3 hover:bg-gray-100">Contact</a>
 
@@ -138,6 +140,7 @@
                     <li><a href="/" class="hover:text-blue-700">Home</a></li>
                     <li><a href="/documents" class="hover:text-blue-700">Documents</a></li>
                     <li><a href="/news" class="hover:text-blue-700">News</a></li>
+                    <li><a href="/operasional" class="hover:text-blue-700">Operasional</a></li>
                     <li><a href="/about" class="hover:text-blue-700">About Us</a></li>
                     <li><a href="/contact" class="hover:text-blue-700">Contact</a></li>
                 </ul>
