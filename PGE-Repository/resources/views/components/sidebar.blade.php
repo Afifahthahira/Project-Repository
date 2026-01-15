@@ -9,18 +9,6 @@
         <!-- Menu -->
         <ul class="mt-8 space-y-2 font-medium">
 
-            {{-- Back to Home --}}
-            <li>
-                <a href="{{ route('home') }}"
-                    class="
-                    flex items-center gap-3 px-4 py-3 rounded-xl transition
-                    text-gray-600 hover:bg-gray-100 hover:text-gray-900
-                ">
-                    <i data-lucide="home" class="w-5 h-5"></i>
-                    Back to Home
-                </a>
-            </li>
-
             {{-- Dashboard --}}
             <li>
                 <a href="/admin"
@@ -37,36 +25,16 @@
 
             {{-- Documents --}}
             <li>
-                @if(Auth::check() && Auth::user()->role === 'admin')
-                    <a href="/admin/dokumen"
-                        class="
-                        flex items-center gap-3 px-4 py-3 rounded-xl transition
-                        {{ request()->is('admin/dokumen*')
-                            ? 'bg-blue-900/80 text-white'
-                            : 'text-blue-900 hover:bg-blue-900/10 hover:text-blue-900' }}
-                    ">
-                        <i data-lucide="file-text" class="w-5 h-5"></i>
-                        Documents
-                    </a>
-                @elseif(Auth::check())
-                    <a href="{{ route('user.documents') }}"
-                        class="
-                        flex items-center gap-3 px-4 py-3 rounded-xl transition
-                        text-blue-900 hover:bg-blue-900/10 hover:text-blue-900
-                    ">
-                        <i data-lucide="file-text" class="w-5 h-5"></i>
-                        Documents
-                    </a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="
-                        flex items-center gap-3 px-4 py-3 rounded-xl transition
-                        text-blue-900 hover:bg-blue-900/10 hover:text-blue-900
-                    ">
-                        <i data-lucide="file-text" class="w-5 h-5"></i>
-                        Documents
-                    </a>
-                @endif
+                <a href="/admin/dokumen"
+                    class="
+                    flex items-center gap-3 px-4 py-3 rounded-xl transition
+                    {{ request()->is('admin/dokumen*')
+                        ? 'bg-blue-900/80 text-white'
+                        : 'text-blue-900 hover:bg-blue-900/10 hover:text-blue-900' }}
+                ">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    Documents
+                </a>
             </li>
 
             {{-- Categories --}}
@@ -80,20 +48,6 @@
                 ">
                     <i data-lucide="folder-tree" class="w-5 h-5"></i>
                     Categories
-                </a>
-            </li>
-
-            {{-- Racks --}}
-            <li>
-                <a href="{{ route('admin.rak.index') }}"
-                    class="
-                    flex items-center gap-3 px-4 py-3 rounded-xl transition
-                    {{ request()->is('admin/rak*')
-                        ? 'bg-blue-900/80 text-white'
-                        : 'text-blue-900 hover:bg-blue-900/10 hover:text-blue-900' }}
-                ">
-                    <i data-lucide="package" class="w-5 h-5"></i>
-                    Racks
                 </a>
             </li>
 
