@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Admin Dashboard' }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -25,6 +26,9 @@
 
     </div>
 </div>
+
+{{-- Chatbot widget untuk admin --}}
+@include('chatbot.widget', ['source' => 'admin'])
 
 {{-- Lucide Icons --}}
 <script src="/js/sidebar.js"></script>

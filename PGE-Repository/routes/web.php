@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\ChatbotController;
 
 // ============================================================
 // PUBLIC (bebas akses)
@@ -110,6 +111,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::resource('users', UserController::class);
         Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
         Route::get('activity-logs/export', [ActivityLogController::class, 'export'])->name('activity-logs.export');
+        Route::get('chat-history', [ChatbotController::class, 'history'])->name('chat-history.index');
     });
 });
 
@@ -121,6 +123,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-dashboard', function () {
         return view('dashboard');
     })->name('user.dashboard');
+
+    // Chatbot (dapat diakses baik oleh user maupun admin selama sudah login)
+    Route::get('/chatbot', [ChatbotController::class, 'index'])
+        ->name('chatbot.index');
+    Route::post('/chatbot/send', [ChatbotController::class, 'send'])
+        ->name('chatbot.send');
 });
 
 
@@ -134,3 +142,4 @@ Route::get('/dokumen/view/{id}', [DokumenController::class, 'showPublic'])
 
 
 require __DIR__ . '/auth.php';
+
