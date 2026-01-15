@@ -2,40 +2,40 @@
 
 @section('content')
 
-<div class="px-6 py-4 space-y-8">
+<div class="px-4 sm:px-6 lg:px-8 py-4 space-y-6 lg:space-y-8">
 
     {{-- ===================== TOP CARDS ===================== --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
-        <div class="p-6 bg-white shadow-md rounded-2xl border border-gray-100">
-            <div class="text-4xl font-semibold text-blue-700">{{ $totalDocuments }}</div>
-            <div class="text-gray-500 text-sm mt-1">Total Documents</div>
+        <div class="p-4 sm:p-6 bg-white shadow-md rounded-2xl border border-gray-100">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-700">{{ $totalDocuments }}</div>
+            <div class="text-gray-500 text-xs sm:text-sm mt-1">Total Documents</div>
         </div>
 
-        <div class="p-6 bg-white shadow-md rounded-2xl border border-gray-100">
-            <div class="text-4xl font-semibold text-green-600">{{ $totalUsers }}</div>
-            <div class="text-gray-500 text-sm mt-1">Total Users</div>
+        <div class="p-4 sm:p-6 bg-white shadow-md rounded-2xl border border-gray-100">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-green-600">{{ $totalUsers }}</div>
+            <div class="text-gray-500 text-xs sm:text-sm mt-1">Total Users</div>
         </div>
 
-        <div class="p-6 bg-white shadow-md rounded-2xl border border-gray-100">
-            <div class="text-4xl font-semibold text-purple-600">{{ $totalDownloads }}</div>
-            <div class="text-gray-500 text-sm mt-1">Total Downloads</div>
+        <div class="p-4 sm:p-6 bg-white shadow-md rounded-2xl border border-gray-100">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-purple-600">{{ $totalDownloads }}</div>
+            <div class="text-gray-500 text-xs sm:text-sm mt-1">Total Downloads</div>
         </div>
 
-        <div class="p-6 bg-white shadow-md rounded-2xl border border-gray-100">
-            <div class="text-4xl font-semibold text-orange-600">{{ $totalViews }}</div>
-            <div class="text-gray-500 text-sm mt-1">Total Views</div>
+        <div class="p-4 sm:p-6 bg-white shadow-md rounded-2xl border border-gray-100">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-orange-600">{{ $totalViews }}</div>
+            <div class="text-gray-500 text-xs sm:text-sm mt-1">Total Views</div>
         </div>
 
     </div>
 
 
     {{-- ===================== 2 COLUMN LAYOUT ===================== --}}
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
 
         {{-- ---------- LEFT: DOWNLOAD CHART ---------- --}}
-        <div class="col-span-2 bg-white shadow-md rounded-2xl border border-gray-100 p-6">
-            <div class="font-semibold text-gray-700 mb-6">Document Downloads</div>
+        <div class="col-span-2 bg-white shadow-md rounded-2xl border border-gray-100 p-4 sm:p-6">
+            <div class="font-semibold text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">Document Downloads</div>
 
             <div class="space-y-4">
                 @foreach ($monthlyDownloads as $month => $val)
@@ -54,8 +54,8 @@
 
 
         {{-- ---------- RIGHT: POPULAR DOCUMENTS ---------- --}}
-        <div class="bg-white shadow-md rounded-2xl border border-gray-100 p-6">
-            <div class="font-semibold text-gray-700 mb-6">Popular Documents</div>
+        <div class="bg-white shadow-md rounded-2xl border border-gray-100 p-4 sm:p-6">
+            <div class="font-semibold text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">Popular Documents</div>
 
             <div class="space-y-4">
                 @foreach ($popularDocuments as $doc)
@@ -82,9 +82,9 @@
 
 
     {{-- ===================== RECENT ACTIVITY ===================== --}}
-    <div class="bg-white shadow-md rounded-2xl border border-gray-100 p-6">
+    <div class="bg-white shadow-md rounded-2xl border border-gray-100 p-4 sm:p-6">
 
-        <div class="font-semibold text-gray-700 mb-6">Recent Activity</div>
+        <div class="font-semibold text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">Recent Activity</div>
 
         <table class="w-full text-sm">
             <thead class="text-gray-500 border-b">

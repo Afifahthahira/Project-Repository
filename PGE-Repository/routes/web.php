@@ -59,9 +59,45 @@ Route::get('/dashboard', function () {
         return redirect()->route('admin.dashboard');
     }
 
+    // Dashboard user biasa - tampilkan data personal
+    $user = Auth::user();
+    
+    // Dokumen yang baru diakses oleh user ini
+    $recentActivities = \App\Models\Aktivitas::with(['dokumen'])
+        ->where('user_id', $user->id_user)
+        ->orderBy('created_at', 'DESC')
+        ->limit(5)
+        ->get();
+    
+    // Dokumen berdasarkan divisi user (rekomendasi)
+    $recommendedDocs = \App\Models\Dokumen::with(['kategori', 'rak', 'divisi'])
+        ->where('status', 'aktif');
+    
+    if ($user->id_divisi) {
+        $recommendedDocs = $recommendedDocs->where('id_divisi', $user->id_divisi);
+    }
+    
+    $recommendedDocs = $recommendedDocs->orderBy('id_dokumen', 'DESC')
+        ->limit(6)
+        ->get();
+    
+    // Dokumen populer (untuk semua)
+    $popularDocs = \App\Models\Dokumen::with(['kategori', 'rak', 'divisi'])
+        ->where('status', 'aktif')
+        ->orderBy('id_dokumen', 'DESC')
+        ->limit(4)
+        ->get();
+    
+    // Statistik personal
+    $myDownloads = \App\Models\Aktivitas::where('user_id', $user->id_user)
+        ->where('action', 'downloaded')
+        ->count();
+    
+    $myViews = \App\Models\Aktivitas::where('user_id', $user->id_user)
+        ->where('action', 'viewed')
+        ->count();
 
-    // Dashboard user biasa
-    return view('dashboard');
+    return view('dashboard', compact('recentActivities', 'recommendedDocs', 'popularDocs', 'myDownloads', 'myViews', 'user'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -88,35 +124,34 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::get('/admin/dokumen/{id}', [DokumenController::class, 'view'])
         ->name('admin.dokumen.view');
-    
+
     Route::get('/admin/dokumen/{id}/download', [DokumenController::class, 'download'])
         ->name('admin.dokumen.download');
 
-
     Route::get('/admin/dokumen', [DokumenController::class, 'index'])
-        ->name('admin.dokumen')
-        ->middleware(['auth', 'isAdmin']);
+        ->name('admin.dokumen');
 
 
 
 
     Route::resource('dokumen', DokumenController::class);
-    Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Resource routes dengan middleware auth.redirect
+    Route::prefix('admin')->name('admin.')->middleware(['auth.redirect'])->group(function () {
         Route::resource('kategori', KategoriController::class);
-    });
-    Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('rak', RakController::class);
         Route::resource('divisi', DivisiController::class);
         Route::resource('users', UserController::class);
         Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
         Route::get('activity-logs/export', [ActivityLogController::class, 'export'])->name('activity-logs.export');
+        Route::get('notifications', [ActivityLogController::class, 'getNotifications'])->name('notifications');
     });
 });
 
 
 
 // USER ROUTES
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth.redirect'])->group(function () {
 
     Route::get('/user-dashboard', function () {
         return view('dashboard');
@@ -129,8 +164,33 @@ Route::middleware(['auth'])->group(function () {
 // ============================================================
 
 Route::get('/dokumen/view/{id}', [DokumenController::class, 'showPublic'])
-    ->middleware('auth')
+    ->middleware('auth.redirect')
     ->name('dokumen.view');
+
+// Download dokumen untuk user biasa
+Route::get('/dokumen/{id}/download', [DokumenController::class, 'download'])
+    ->middleware('auth.redirect')
+    ->name('dokumen.download');
+
+// ============================================================
+// USER DOCUMENTS - untuk semua user yang sudah login
+// ============================================================
+
+Route::middleware(['auth.redirect'])->group(function () {
+    Route::get('/documents', function () {
+        if (Auth::user()->role === 'admin') {
+            return redirect('/admin/dokumen');
+        }
+
+        // Untuk user biasa, tampilkan halaman documents
+        $dokumen = \App\Models\Dokumen::with(['kategori', 'rak', 'divisi'])
+            ->where('status', 'aktif')
+            ->orderBy('id_dokumen', 'DESC')
+            ->get();
+
+        return view('user.documents', compact('dokumen'));
+    })->name('user.documents');
+});
 
 
 require __DIR__ . '/auth.php';

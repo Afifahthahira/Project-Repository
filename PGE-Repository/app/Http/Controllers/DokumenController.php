@@ -20,6 +20,16 @@ class DokumenController extends Controller
     {
         $dokumen = Dokumen::findOrFail($id);
 
+        // Log activity jika user sudah login
+        if (Auth::check()) {
+            Aktivitas::create([
+                'user_id' => Auth::user()->id_user,
+                'dokumen_id' => $dokumen->id_dokumen,
+                'action' => 'viewed',
+                'ip_address' => request()->ip(),
+            ]);
+        }
+
         return view('public.view', compact('dokumen'));
     }
 
@@ -209,7 +219,7 @@ class DokumenController extends Controller
         // Log activity
         if (Auth::check()) {
             Aktivitas::create([
-                'user_id' => Auth::id(),
+                'user_id' => Auth::user()->id_user,
                 'dokumen_id' => $dokumen->id_dokumen,
                 'action' => 'downloaded',
                 'ip_address' => request()->ip(),
