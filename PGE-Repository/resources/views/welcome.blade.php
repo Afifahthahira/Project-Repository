@@ -5,26 +5,26 @@
 {{-- ============================
 1. HERO SECTION
 ================================ --}}
-<section class="min-h-screen flex items-center bg-white py-10">
-    <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+<section class="min-h-screen flex items-center bg-white py-10 px-4">
+    <div class="max-w-screen-xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
         {{-- Left Content --}}
-        <div>
-            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
-                Platform Repository <br> Dokumen PGE yang 
+        <div class="text-center lg:text-left">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight text-gray-900">
+                Platform Repository <br class="hidden sm:block"> Dokumen PGE yang
                 <span class="text-[#4A5AA8]">Modern & Efisien.</span>
             </h1>
 
-            <p class="mt-5 text-lg text-gray-600 leading-relaxed">
-                PGE Repository menyediakan sistem penyimpanan dokumen terintegrasi untuk mendukung 
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                PGE Repository menyediakan sistem penyimpanan dokumen terintegrasi untuk mendukung
                 pengelolaan data, kolaborasi, dan akses informasi secara aman dan terpusat.
             </p>
         </div>
 
         {{-- Right Image --}}
-        <div class="flex justify-center">
-            <img src="/images/image.png" 
-                class="rounded-xl shadow-lg w-full max-h-[380px] object-cover" />
+        <div class="flex justify-center lg:justify-end mt-8 lg:mt-0">
+            <img src="/images/image.png"
+                class="rounded-xl shadow-lg w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover" />
         </div>
 
     </div>
@@ -33,33 +33,38 @@
 {{-- ============================
 2. SEARCH DOCUMENT BOX
 ================================ --}}
-<div class="w-full flex justify-center px-4">
-    <div class="bg-white w-full max-w-3xl -mt-14 shadow-lg rounded-xl p-5 border text-center">
-        <h3 class="text-sm text-gray-700 mb-3">Search Documents</h3>
+<div class="w-full flex justify-center px-4 sm:px-6 lg:px-8">
+    <form action="{{ route('public.search') }}" method="GET" class="bg-white w-full max-w-4xl -mt-14 shadow-lg rounded-xl p-4 sm:p-6 lg:p-8 border text-center">
+        <h3 class="text-sm sm:text-base text-gray-700 mb-4">Search Documents</h3>
 
-        <div class="flex gap-3">
-            <input type="text" placeholder="Cari dokumen, laporan, atau arsip..."
-                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <input type="text"
+                   name="q"
+                   placeholder="Search documents, reports, or archives..."
+                   class="flex-1 border border-gray-300 rounded-lg px-4 py-3 sm:py-4 focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm sm:text-base transition-colors"
+                   required>
 
-            <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium transition whitespace-nowrap text-sm sm:text-base">
                 Search
             </button>
         </div>
-    </div>
+
+        <p class="text-xs sm:text-sm text-gray-500 mt-3">Search through our extensive collection of PGE documents</p>
+    </form>
 </div>
 
 {{-- WRAPPER --}}
-<div class="mt-20 px-6 max-w-7xl mx-auto">
+<div class="mt-16 sm:mt-20 px-4 sm:px-6 max-w-7xl mx-auto">
 
     {{-- ============================
     3. POPULAR DOCUMENTS
     ================================= --}}
     <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-semibold">Popular Documents</h3>
+        <h3 class="text-lg sm:text-xl font-semibold">Popular Documents</h3>
         <a href="#" class="text-blue-700 text-sm hover:underline">View All →</a>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         @foreach ([
             ['2024', 'Annual Report PGE 2024 Forecast', '1280 downloads'],
             ['2023', 'Technical Standards Geothermal Operations', '825 downloads'],
@@ -77,12 +82,12 @@
     {{-- ============================
     4. LATEST NEWS
     ================================= --}}
-    <div class="flex items-center justify-between mt-16 mb-6">
-        <h3 class="text-xl font-semibold">Latest News</h3>
+    <div class="flex items-center justify-between mt-12 sm:mt-16 mb-6">
+        <h3 class="text-lg sm:text-xl font-semibold">Latest News</h3>
         <a href="#" class="text-blue-700 text-sm hover:underline">View All →</a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
         @foreach ([1,2,3] as $i)
             <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
                 <img src="https://picsum.photos/600/400?random={{ $i }}" 
@@ -112,20 +117,20 @@
     {{-- ============================
     5. STATISTICS
     ================================= --}}
-    <div class="bg-blue-800 text-white rounded-xl py-12 mt-20 grid grid-cols-1 sm:grid-cols-3 text-center gap-6">
-        <div>
-            <div class="text-3xl font-bold">12,500+</div>
-            <div class="text-sm opacity-80">Total Documents</div>
+    <div class="bg-blue-800 text-white rounded-xl py-8 sm:py-12 mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 text-center gap-6 sm:gap-8">
+        <div class="px-4">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">12,500+</div>
+            <div class="text-sm sm:text-base opacity-80">Total Documents</div>
         </div>
 
-        <div>
-            <div class="text-3xl font-bold">45,000+</div>
-            <div class="text-sm opacity-80">Total Downloads</div>
+        <div class="px-4">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">45,000+</div>
+            <div class="text-sm sm:text-base opacity-80">Total Downloads</div>
         </div>
 
-        <div>
-            <div class="text-3xl font-bold">500+</div>
-            <div class="text-sm opacity-80">Monthly Updates</div>
+        <div class="px-4">
+            <div class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">500+</div>
+            <div class="text-sm sm:text-base opacity-80">Monthly Updates</div>
         </div>
     </div>
 

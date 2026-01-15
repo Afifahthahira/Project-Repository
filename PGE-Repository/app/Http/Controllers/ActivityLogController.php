@@ -106,5 +106,30 @@ class ActivityLogController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
+    public function getNotifications()
+    {
+        $notifications = Aktivitas::with(['user', 'dokumen'])
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get()
+            ->map(function ($activity) {
+                return [
+                    'id' => $activity->id_aktivitas,
+                    'user' => $activity->user->nama ?? 'Unknown',
+                    'action' => $activity->action,
+                    'document' => $activity->dokumen->judul ?? 'Unknown Document',
+                    'time' => $activity->created_at->diffForHumans(),
+                    'timestamp' => $activity->created_at->toIso8601String(),
+                ];
+            });
+
+        $unreadCount = Aktivitas::where('created_at', '>', now()->subHours(24))->count();
+
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => $unreadCount > 0 ? $unreadCount : 0,
+        ]);
+    }
 }
 

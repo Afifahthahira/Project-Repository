@@ -14,6 +14,6 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'Akses tidak diizinkan.');
+        return redirect()->route('login')->with('error', 'Anda harus login sebagai admin untuk mengakses halaman ini.');
     }
 }
